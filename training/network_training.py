@@ -8,8 +8,8 @@ This script performs the training of one fold of the cross-validation
 import os
 import sys
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-PROJECT_HOME = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-sys.path.append(PROJECT_HOME) 
+PROJECT_HOME = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # extract directory of PyCharm project
+sys.path.append(PROJECT_HOME)  # this line is needed to recognize the dir as a python package
 import tensorflow as tf
 import time
 from datetime import datetime
@@ -950,7 +950,7 @@ def main():
     train_test_split_to_replicate = config_dict['train_test_split_to_replicate']  # type: str # path to directory containing the test subjects of each CV split
 
     date = (datetime.today().strftime('%b_%d_%Y'))  # save today's date
-    training_outputs_folder = "Train_Outputs_{}_{}".format(date, input_ds_identifier)  # type: str # name of folder where all training outputs will be saved
+    training_outputs_folder = f"Train_Outputs_{date}_{input_ds_identifier}"  # type: str # name of folder where all training outputs will be saved
 
     assert tf.test.is_built_with_cuda(), "TF was not built with CUDA"
     assert tf.config.experimental.list_physical_devices('GPU'), "A GPU is required to run this script"
